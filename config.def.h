@@ -34,7 +34,7 @@ static Color colors[] = {
 #define BAR_BEGIN       '['
 #define BAR_END         ']'
 /* status bar (command line option -s) position */
-#define BAR_POS         BAR_TOP /* BAR_BOTTOM, BAR_OFF */
+#define BAR_POS         BAR_OFF /* BAR_BOTTOM, BAR_OFF */
 /* whether status bar should be hidden if only one client exists */
 #define BAR_AUTOHIDE    true
 /* master width factor [0.1 .. 0.9] */
@@ -42,7 +42,7 @@ static Color colors[] = {
 /* number of clients in master area */
 #define NMASTER 1
 /* scroll back buffer size in lines */
-#define SCROLL_HISTORY 500
+#define SCROLL_HISTORY 999999
 /* printf format string for the tag in the status bar */
 #define TAG_SYMBOL   "[%s]"
 /* curses attributes for the currently selected tags */
@@ -63,13 +63,13 @@ const char tags[][8] = { "1", "2", "3", "4", "5" };
 
 /* by default the first layout entry is used */
 static Layout layouts[] = {
+	{ "[ ]", fullscreen },
 	{ "[]=", tile },
 	{ "+++", grid },
 	{ "TTT", bstack },
-	{ "[ ]", fullscreen },
 };
 
-#define MOD  CTRL('g')
+#define MOD  CTRL('b')
 #define TAGKEYS(KEY,TAG) \
 	{ { MOD, 'v', KEY,     }, { view,           { tags[TAG] }               } }, \
 	{ { MOD, 't', KEY,     }, { tag,            { tags[TAG] }               } }, \
@@ -81,10 +81,10 @@ static KeyBinding bindings[] = {
 	{ { MOD, 'c',          }, { create,         { NULL }                    } },
 	{ { MOD, 'C',          }, { create,         { NULL, NULL, "$CWD" }      } },
 	{ { MOD, 'x', 'x',     }, { killclient,     { NULL }                    } },
-	{ { MOD, 'j',          }, { focusnext,      { NULL }                    } },
-	{ { MOD, 'J',          }, { focusnextnm,    { NULL }                    } },
-	{ { MOD, 'K',          }, { focusprevnm,    { NULL }                    } },
-	{ { MOD, 'k',          }, { focusprev,      { NULL }                    } },
+	{ { MOD, 'n',          }, { focusnext,      { NULL }                    } },
+	{ { MOD, 'N',          }, { focusnextnm,    { NULL }                    } },
+	{ { MOD, 'P',          }, { focusprevnm,    { NULL }                    } },
+	{ { MOD, 'p',          }, { focusprev,      { NULL }                    } },
 	{ { MOD, 'f',          }, { setlayout,      { "[]=" }                   } },
 	{ { MOD, 'g',          }, { setlayout,      { "+++" }                   } },
 	{ { MOD, 'b',          }, { setlayout,      { "TTT" }                   } },
